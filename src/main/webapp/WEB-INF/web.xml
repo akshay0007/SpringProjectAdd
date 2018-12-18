@@ -9,8 +9,8 @@
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
-            <param-name>contextConfigure</param-name>
-            <param-value>/WEB-INF/contextConfigure-value.xml</param-value>
+            <param-name>contextClass</param-name>
+            <param-value>/WEB-INF/contextClass-servlet.xml</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
