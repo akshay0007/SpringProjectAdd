@@ -7,11 +7,11 @@ import java.util.List;
  */
 //I interger//T EmployeeVO
 public interface EmployeeDao<T, I> {
-    public void addEmployee(T t);
+     void addEmployee(T t);
 
-    public void removeEmployee(I i);
+     void removeEmployee(I i);
 
-    public List<T> getListEmployee();
+     List<T> getListEmployee();
 
-    public void updateEmployee(T t);
+     void updateEmployee(T t);
 }

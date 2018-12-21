@@ -5,7 +5,6 @@ package com.myproject.example;
  */
 public class MainClass {
     public static void main(String... arg) {
-
     }
 }
 
@@ -17,4 +16,4 @@ public class MainClass {
 
 //@Component used to auto-detect and auto-configure beans using classpath scanning. There’s an implicit one-to-one mapping between the annotated class and the bean (i.e. one bean per class).
 
-    //@Bean is used to explicitly declare a single bean, rather than letting Spring do it automatically for us.
+//@Bean is used to explicitly declare a single bean, rather than letting Spring do it automatically for us.

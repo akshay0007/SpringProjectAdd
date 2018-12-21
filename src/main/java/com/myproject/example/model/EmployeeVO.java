@@ -1,16 +1,22 @@
 package com.myproject.example.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by stpl on 18/12/18.
  */
+@Entity
+@Table(name = "employee")
 public class EmployeeVO implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_names")
     private String lastName;
 
     public static long getSerialVersionUID() {

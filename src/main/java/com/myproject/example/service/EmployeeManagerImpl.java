@@ -16,7 +16,12 @@ public class EmployeeManagerImpl<T, I> implements EmployeeManager<T, I> {
 
     @Override
     public List<T> getAllEmployee() {
-       return employeeDao.getListEmployee();
+        return employeeDao.getListEmployee();
+    }
+
+    @Override
+    public void addList(T t) {
+        employeeDao.addEmployee(t);
     }
 
 
