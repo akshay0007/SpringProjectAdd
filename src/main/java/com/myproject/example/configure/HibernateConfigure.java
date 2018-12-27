@@ -1,6 +1,6 @@
 package com.myproject.example.configure;
 
-import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,46 +16,55 @@ import java.util.Properties;
  * Created by stpl on 19/12/18.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.myproject.example"})
 @EnableTransactionManagement
+@ComponentScan(basePackages = {"com.myproject.example"})
+//@PropertySource("classpath:../webapp/resources/hibernate.properties")
 public class HibernateConfigure {
     // Change the below based on the DBMS you choose
-    private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/shopping";
+    private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/shopping?createDatabaseIfNotExist=true";
     private final static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
-    private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";
+    private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQL5Dialect";
     private final static String DATABASE_USERNAME = "root";
     private final static String DATABASE_PASSWORD = "root";
 
-
+    // dataSource bean will be available
     @Bean("dataSource")
     public DataSource getDataSource() {
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setDriverClassName(DATABASE_DRIVER);
-        basicDataSource.setUrl(DATABASE_URL);
-        basicDataSource.setUsername(DATABASE_USERNAME);
-        basicDataSource.setPassword(DATABASE_PASSWORD);
-        return basicDataSource;
+        BasicDataSource dataSource = new BasicDataSource();
+        // Providing the database connection information
+        dataSource.setDriverClassName(DATABASE_DRIVER);
+        dataSource.setUrl(DATABASE_URL);
+        dataSource.setUsername(DATABASE_USERNAME);
+        dataSource.setPassword(DATABASE_PASSWORD);
+        return dataSource;
     }
+
+    // sessionFactory bean will be available
 
     @Bean
     public SessionFactory getSessionFactory(DataSource dataSource) {
-        LocalSessionFactoryBuilder localSessionFactoryBuilder = new LocalSessionFactoryBuilder(dataSource);
-        localSessionFactoryBuilder.addProperties(getHibernateProperties());
-        return localSessionFactoryBuilder.buildSessionFactory();
+        LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource);
+        builder.addProperties(getHibernateProperties());
+        builder.scanPackages("com.myproject.example");
+        return builder.buildSessionFactory();
     }
 
 
-    @Bean
-    public HibernateTransactionManager getHibernateTransactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
-        return transactionManager;
-    }
-
-    public Properties getHibernateProperties() {
+    // All the hibernate properties will be returned in this method
+    private Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", DATABASE_DIALECT);
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
+        //properties.put("hibernate.hbm2ddl.auto", "create");
+
         return properties;
+    }
+
+    // transactionManager bean
+    @Bean
+    public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
+        return transactionManager;
     }
 }

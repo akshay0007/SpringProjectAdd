@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class EmployeeController<T, I> {
     }
 
     @RequestMapping(value = {"/gelAllEmployeeResponse"}, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<I> addEmployee(@RequestBody(required = true) T t) {
+    public ResponseEntity<I> addEmployee(@RequestBody T t) {
         if (t != null) {
             employeeManager.addList(t);
         }

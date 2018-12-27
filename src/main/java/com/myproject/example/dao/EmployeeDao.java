@@ -9,9 +9,9 @@ import java.util.List;
 public interface EmployeeDao<T, I> {
      void addEmployee(T t);
 
-     void removeEmployee(I i);
-
      List<T> getListEmployee();
+
+     void removeEmployee(I i);
 
      void updateEmployee(T t);
 }
