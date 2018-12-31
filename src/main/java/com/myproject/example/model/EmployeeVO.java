@@ -19,9 +19,6 @@ public class EmployeeVO implements Serializable {
     @Column(name = "last_names")
     private String lastName;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public EmployeeVO(Integer id, String firstName, String lastName) {
         this.id = id;

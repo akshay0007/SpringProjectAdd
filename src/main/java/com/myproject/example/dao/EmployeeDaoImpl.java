@@ -1,36 +1,40 @@
 package com.myproject.example.dao;
 
+import com.myproject.example.configure.HibernateUtils;
 import com.myproject.example.model.EmployeeVO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
+
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Root;
 
 /**
  * Created by stpl on 18/12/18.
  */
-@Repository
+@Repository("employeeDaoImpl")
 @Transactional
 public class EmployeeDaoImpl<T, I> implements EmployeeDao<T, I> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
-
     @Override
     public void addEmployee(T t) {
-        Session session = null;
-        try {
-            session = sessionFactory.getCurrentSession();
-            session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
             session.save(t);
-            session.getTransaction().commit();
+            transaction.commit();
         } catch (Exception ex) {
-            session.beginTransaction().rollback();
-            session.close();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
     }
 
@@ -41,10 +45,26 @@ public class EmployeeDaoImpl<T, I> implements EmployeeDao<T, I> {
 
     @Override
     public List<T> getListEmployee() {
-        return sessionFactory
-                .getCurrentSession()
-                .createCriteria(EmployeeVO.class)
-                .list();
+        Transaction transaction = null;
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<EmployeeVO> query = builder.createQuery(EmployeeVO.class);
+            Root<EmployeeVO> root = query.from(EmployeeVO.class);
+            query.select(root);
+            Query<EmployeeVO> q = session.createQuery(query);
+            List<EmployeeVO> employees = q.getResultList();
+            for (EmployeeVO employee : employees) {
+                System.out.println(employee.getFirstName());
+            }
+            transaction.commit();
+            return (List<T>) employees;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return null;
     }
 
     @Override

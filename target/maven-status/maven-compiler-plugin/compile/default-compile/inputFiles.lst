@@ -1,0 +1,8 @@
+/home/stpl/WorkSpaces/example/svexample/SpringProjectAdd/src/main/java/com/myproject/example/controller/EmployeeController.java
+/home/stpl/WorkSpaces/example/svexample/SpringProjectAdd/src/main/java/com/myproject/example/dao/EmployeeDaoImpl.java
+/home/stpl/WorkSpaces/example/svexample/SpringProjectAdd/src/main/java/com/myproject/example/service/EmployeeManagerImpl.java
+/home/stpl/WorkSpaces/example/svexample/SpringProjectAdd/src/main/java/com/myproject/example/service/EmployeeManager.java
+/home/stpl/WorkSpaces/example/svexample/SpringProjectAdd/src/main/java/com/myproject/example/model/EmployeeVO.java
+/home/stpl/WorkSpaces/example/svexample/SpringProjectAdd/src/main/java/com/myproject/example/MainClass.java
+/home/stpl/WorkSpaces/example/svexample/SpringProjectAdd/src/main/java/com/myproject/example/configure/HibernateConfigure.java
+/home/stpl/WorkSpaces/example/svexample/SpringProjectAdd/src/main/java/com/myproject/example/dao/EmployeeDao.java
