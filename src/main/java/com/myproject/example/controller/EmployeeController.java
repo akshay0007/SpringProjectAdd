@@ -33,12 +33,13 @@ public class EmployeeController<T, I> {
         return new ResponseEntity(employeeManager.getAllEmployee(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/gelAllEmployeeResponse"}, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<I> addEmployee(@RequestBody T t) {
+    @RequestMapping(value = {"/addEmployees"}, method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> addEmployee(@RequestBody T t) {
         if (t != null) {
             employeeManager.addList(t);
         }
-        return new ResponseEntity(getSuccessMessage(), HttpStatus.OK);
+        return ResponseEntity.ok().body("sucuessfully deployed");
     }
 
     public Map<String, String> getSuccessMessage() {
