@@ -14,6 +14,7 @@ import java.util.Map;
 /**
  * Created by stpl on 31/12/18.
  */
+//@PropertySource(value = "classpath:db.properties")
 public class HibernateUtils {
     private static StandardServiceRegistry registry;
     private static SessionFactory sessionFactory;
@@ -23,11 +24,13 @@ public class HibernateUtils {
             try {
                 StandardServiceRegistryBuilder standardServiceRegistry = new StandardServiceRegistryBuilder();
                 Map<String, String> settings = new HashMap<>();
+
                 settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/shopping?useSSL=false");
+                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/shopping");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "root");
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+
                 standardServiceRegistry.applySettings(settings);
                 registry = standardServiceRegistry.build();
 

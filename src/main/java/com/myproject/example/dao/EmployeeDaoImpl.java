@@ -67,6 +67,15 @@ public class EmployeeDaoImpl<T, I> implements EmployeeDao<T, I> {
         return null;
     }
 
+    public void listEmp(){
+        Session session=null;
+        CriteriaBuilder cb=session.getCriteriaBuilder();
+        CriteriaQuery<EmployeeVO> empVoQuery=cb.createQuery(EmployeeVO.class);
+        Root<EmployeeVO> root=empVoQuery.from(EmployeeVO.class);
+        empVoQuery.select(root);
+        Query<EmployeeVO> query=session.createQuery(empVoQuery);
+    }
+
     @Override
     public void updateEmployee(T t) {
 
