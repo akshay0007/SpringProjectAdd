@@ -16,15 +16,10 @@ public class EmployeeVO implements Serializable {
     private Integer id;
     @Column(name = "first_name")
     private String firstName;
-    @Column(name = "last_names")
+    @Column(name = "last_name")
     private String lastName;
 
 
-    public EmployeeVO(Integer id, String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
     public Integer getId() {
         return id;

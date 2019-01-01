@@ -8,7 +8,11 @@ import java.util.List;
 
 public interface EmployeeManager<T, I> {
 
-    List<T> getAllEmployee();
+    List<T> getAllList();
 
-    void addList(T t);
+    String addItem(T t);
+
+    String deleteItem(T t);
+
+    String updateItem(I id);
 }
