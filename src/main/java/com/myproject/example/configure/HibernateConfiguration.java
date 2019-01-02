@@ -1,6 +1,8 @@
 package com.myproject.example.configure;
 
 import com.myproject.example.model.*;
+import com.myproject.example.model.shopping.Options;
+import com.myproject.example.model.shopping.Products;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -10,6 +12,7 @@ import org.hibernate.cfg.Environment;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by ubuntu on 29/12/18.
@@ -25,6 +28,11 @@ public class HibernateConfiguration {
     private final static String CREATE_HB = "create";
 
 
+    public void getPropertes(){
+//        Properties prooperties=new Properties();
+//        prooperties.load(HibernateConfiguration.class.getResourceAsStream("/"))
+    }
+
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
@@ -36,8 +44,9 @@ public class HibernateConfiguration {
                 settings.put(Environment.USER, DATABASE_USERNAME);
                 settings.put(Environment.PASS, DATABASE_PASSWORD);
                 settings.put(Environment.DIALECT, DATABASE_DIALECT);
-//                settings.put(Environment.HBM2DDL_AUTO, CREATE_HB);
-//                settings.put(Environment.SHOW_SQL,"true");
+                settings.put(Environment.HBM2DDL_AUTO, CREATE_HB);
+                settings.put(Environment.SHOW_SQL,"true");
+                settings.put(Environment.POOL_SIZE,"20");
 
                 registryBuilder.applySettings(settings);
 
@@ -45,17 +54,16 @@ public class HibernateConfiguration {
 
                 MetadataSources sources = new MetadataSources(registry)
                         .addAnnotatedClass(EmployeeVO.class)
-                        .addAnnotatedClass(Account.class)
-                        .addAnnotatedClass(Order.class)
-                        .addAnnotatedClass(OrderDetail.class)
-                        .addAnnotatedClass(Product.class)
-                        .addAnnotatedClass(Review.class)
-                        .addAnnotatedClass(Address.class)
-                        .addAnnotatedClass(Course.class);
+                        .addAnnotatedClass(Products.class)
+                        .addAnnotatedClass(Options.class);
+//                        .addAnnotatedClass(OrderDetail.class)
+//                        .addAnnotatedClass(Product.class)
+//                        .addAnnotatedClass(Review.class)
+//                        .addAnnotatedClass(Address.class)
+//                        .addAnnotatedClass(Course.class);
 
                 Metadata metaData = sources.getMetadataBuilder().build();
                 sessionFactory = metaData.getSessionFactoryBuilder().build();
-
 
             } catch (Exception e) {
                 e.printStackTrace();

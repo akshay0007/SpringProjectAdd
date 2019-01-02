@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by ubuntu on 30/12/18.
  */
-@Entity
+//@Entity
 public class Student {
 
     @Id
@@ -21,11 +21,11 @@ public class Student {
     @Embedded
     private Address address;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "student_course"
-            , joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
-            , inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
-    private List<Course> courses = new ArrayList<>();
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "student_course"
+//            , joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
+//            , inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
+//    private List<Course> courses = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -51,11 +51,11 @@ public class Student {
         this.address = address;
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
+//    public List<Course> getCourses() {
+//        return courses;
+//    }
+//
+//    public void setCourses(List<Course> courses) {
+//        this.courses = courses;
+//    }
 }

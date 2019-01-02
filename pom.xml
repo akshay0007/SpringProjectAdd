@@ -95,6 +95,27 @@
             <version>${spring.web.version}</version>
         </dependency>
 
+        <!-- SLF4J Logging -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.24</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.ttddyy/datasource-proxy -->
+        <!--<dependency>-->
+            <!--<groupId>net.ttddyy</groupId>-->
+            <!--<artifactId>datasource-proxy</artifactId>-->
+            <!--<version>1.1</version>-->
+        <!--</dependency>-->
+
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>

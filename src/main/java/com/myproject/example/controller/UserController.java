@@ -1,5 +1,6 @@
 package com.myproject.example.controller;
 
+import com.myproject.example.model.EmployeeVO;
 import com.myproject.example.service.EmployeeManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/user")
-public class UserController<T> {
+public class UserController<T extends EmployeeVO> {
 
     @Autowired
     private EmployeeManager employeeManager;

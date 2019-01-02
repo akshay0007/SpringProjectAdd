@@ -4,6 +4,7 @@ import com.myproject.example.dao.EmployeeDao;
 import com.myproject.example.model.EmployeeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class EmployeeManagerImpl<T extends EmployeeVO, I> implements EmployeeMan
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<T> getAllList() {
         return employeeDao.getListEmployee();
     }
